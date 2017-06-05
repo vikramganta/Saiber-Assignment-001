@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Previous Orders</title>
+    <link href="PreviousOrdersCSS.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div id="inputfield">
+    <fieldset id="tab2"> <br>
+        <legend></legend>
+        <h4>Order Details</h4>
+        FirstName:<input type="text" name="fname" id="fname" class="inputtext"><br><br>
+        LastName:<input type="text" name="lname" id="lname" class="inputtext"><br><br>
+        Order Date: <input type="text" name="date" id="date" class="inputtext"><br><br>
+        <button onclick="addTableRow()" class="btn">Add</button>
+        <button onclick="hidedetails()" class="btn">Cancel</button>
+    </fieldset>
+</div>
+
+<div class="container">
+
+    <input type="button" value="New Order" onclick="showdetails()" id="neworderbtn">
+    <input type="button" value="Edit Order" onclick="editTableContent()" id="editorderbtn">
+    <h1><span>Previous Orders</span></h1>
+    <div class="tab tab-1">
+        <table id="table" border="1">
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>DateOfBirth</th>
+            </tr>
+            <tr>
+                <td>Vikarm</td>
+                <td>Ganta</td>
+                <td>12/05/2017</td>
+            </tr>
+            <tr>
+                <td>Vikram</td>
+                <td>Ganta</td>
+                <td>12/05/2017</td>
+            </tr>
+            <tr>
+                <td>Vikram</td>
+                <td>Ganta</td>
+                <td>22/05/2017</td>
+            </tr>
+            <tr>
+                <td>Vikram</td>
+                <td>Ganta</td>
+                <td>1/06/2017</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+
+
+<script>
+    var rIndex,table = document.getElementById("table");
+    function addTableRow() {
+        var newRow = table.insertRow(table.length),
+            cell1 = newRow.insertCell(0),
+            cell2 = newRow.insertCell(1),
+            cell3 = newRow.insertCell(2),
+            fname = document.getElementById("fname").value,
+            lname = document.getElementById("lname").value,
+            date = document.getElementById("date").value;
+          cell1.innerHTML = fname;
+          cell2.innerHTML = lname;
+          cell3.innerHTML = date;
+        selectedRowToInput();
+        clearcontent();
+        
+    }
+    
+    function selectedRowToInput() {
+        for(var i = 1; i < table.rows.length;i++){
+            table.rows[i].onclick = function () {
+                rIndex = this.rowIndex;
+                console.log(rIndex);
+                document.getElementById("fname").value = this.cells[0].innerHTML;
+                document.getElementById("lname").value = this.cells[1].innerHTML;
+                document.getElementById("date").value = this.cells[2].innerHTML;
+            };
+        }
+        
+    }
+    selectedRowToInput();
+    function editTableContent() {
+        var fname = document.getElementById("fname").value,
+            lname = document.getElementById("lname").value,
+            age = document.getElementById("date").value;
+        table.rows[rIndex].cells[0].innerHTML = fname;
+        table.rows[rIndex].cells[1].innerHTML = lname;
+        table.rows[rIndex].cells[2].innerHTML = date;
+   clearcontent();
+    }
+    function clearcontent() {
+       // alert("hii");
+        document.getElementById("fname").value = " ";
+        document.getElementById("lname").value = " ";
+        document.getElementById("date").value = " ";
+    }
+    function showdetails() {
+        document.getElementById("inputfield").style.display = "block";
+    }
+    function hidedetails() {
+        document.getElementById("inputfield").style.display = "none";
+        clearcontent();
+    }
+</script>
+</body>
+</html>
